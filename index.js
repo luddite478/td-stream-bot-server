@@ -11,7 +11,7 @@ const PORT = 8787
 
 const handleMessage = require('./handlers/message')
 const handleDownloadRequest = require('./handlers/handleDownloadRequest')
-global.serverAddress = `${process.env.AWS_SERVER_ADDRESS}:${PORT}`
+global.serverAddress = `${process.env.AWS_SERVER_ADDRESS}`
 
 global.msgsDir = path.join(__dirname, 'messages')
 global.isConenctedToTD = false

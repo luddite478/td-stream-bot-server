@@ -34,12 +34,12 @@ function handleNewLogLine (io, line) {
         } else if (line.includes('EOF')) {
             streamPath = line.split(' ')[3].split(']')[2].substring(1)
             const broadcastAddr = `rtsp://${serverAddress}:554${streamPath}`
-            console.log('Broadcast stop', broadcastAddr)
+            console.log('Broadcast stop: EOF', broadcastAddr)
             io.emit('rtsp_broadcast_end', broadcastAddr)
 
         } else if (firstWord === 'TEARDOWN') {
             const streamUrl = line.split(' ')[1]
-            console.log('Broadcast stop', streamUrl)
+            console.log('Broadcast stop: TEARDOWN', streamUrl)
             io.emit('rtsp_broadcast_end', streamUrl)
         }
 
