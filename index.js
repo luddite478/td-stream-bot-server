@@ -5,13 +5,13 @@ const http = require('http').createServer(app)
 const io = require('socket.io')(http)
 const path = require('path')
 require('./stream_notificator')(io)
+require('dotenv').config()
 
 const PORT = 8787
 
 const handleMessage = require('./handlers/message')
 const handleDownloadRequest = require('./handlers/handleDownloadRequest')
-
-require('dotenv').config()
+global.serverAddress = `${process.env.AWS_SERVER_ADDRESS}:${PORT}`
 
 global.msgsDir = path.join(__dirname, 'messages')
 global.isConenctedToTD = false

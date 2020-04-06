@@ -23,19 +23,30 @@ function setWatcherToLatestLogFile (io, logFiles, logPath) {
 }
 
 function handleNewLogLine (io, line) {
-    const firstWord = line.split(' ')[0]
+    try {
+        const firstWord = line.split(' ')[0]
 
-    if (firstWord === 'RECORD') {
-        const streamUrl = line.split(' ')[1]
-        console.log('New broadcast', streamUrl)
-        io.emit('rtsp_broadcast_start', streamUrl)
-    }
+        if (firstWord === 'RECORD') {
+            const streamUrl = line.split(' ')[1]
+            console.log('New broadcast', streamUrl)
+            io.emit('rtsp_broadcast_start', streamUrl)
 
-    if (firstWord === 'TEARDOWN') {
-        const streamUrl = line.split(' ')[1]
-        console.log('Broadcast stop', streamUrl)
-        io.emit('rtsp_broadcast_end', streamUrl)
+        } else if (line.includes('EOF')) {
+            streamPath = line.split(' ')[3].split(']')[2].substring(1)
+            const broadcastAddr = `rtsp://${serverAddress}:554${streamPath}`
+            console.log('Broadcast stop', broadcastAddr)
+            io.emit('rtsp_broadcast_end', broadcastAddr)
+
+        } else if (firstWord === 'TEARDOWN') {
+            const streamUrl = line.split(' ')[1]
+            console.log('Broadcast stop', streamUrl)
+            io.emit('rtsp_broadcast_end', streamUrl)
+        }
+
+    } catch (err) {
+        console.log(err)
     }
+    
 }
 
 function handleNewLogFile (io, logPath) { 
