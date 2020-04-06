@@ -1,4 +1,4 @@
-Telegram bot, and stream notificator for Touchdesigner
+Telegram bot and stream notificator for Touchdesigner
 
 Need `allowed_users.json` file
 
