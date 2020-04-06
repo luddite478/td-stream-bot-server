@@ -32,6 +32,7 @@ function handleNewLogLine (io, line) {
             io.emit('rtsp_broadcast_start', streamUrl)
 
         } else if (line.includes('EOF')) {
+            console.log(line.split(' ')[3])
             streamPath = line.split(' ')[3].split(']')[2].substring(1)
             const broadcastAddr = `rtsp://${serverAddress}:554${streamPath}`
             console.log('Broadcast stop: EOF', broadcastAddr)
