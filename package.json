@@ -1,0 +1,26 @@
+{
+  "name": "infrastructura_bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chokidar": "^3.3.1",
+    "content-type-parser": "^1.0.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mime": "^2.4.4",
+    "node-telegram-bot-api": "^0.40.0",
+    "socket.io": "^2.3.0",
+    "tail": "^2.0.3"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "messages/*"
+    ]
+  }
+}
