@@ -1,0 +1,7 @@
+{ 
+    apps : [{
+      name : 'stream-server',
+      script : 'index.js',
+      interpreter : 'node@12.16.1'
+   }]
+  }
