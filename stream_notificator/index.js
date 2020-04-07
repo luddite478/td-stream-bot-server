@@ -54,7 +54,7 @@ function handleNewLogLine (io, line) {
 
     } catch (err) {
         console.log(err)
-        io.emit('rtsp_broadcast_end', broadcastAddr)
+        io.emit('rtsp_broadcast_end', 'last')
     }
     
 }
