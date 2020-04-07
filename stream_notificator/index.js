@@ -32,7 +32,15 @@ function handleNewLogLine (io, line) {
             io.emit('rtsp_broadcast_start', streamUrl)
 
         } else if (line.includes('EOF')) {
-            console.log(line.split(' ')[3])
+            /* TODO handle undexpected logs
+            // 0|index  | [ '[H2k_DpCWg]2020/04/07',
+            0|index  |   '14:44:16',
+            0|index  |   'rtsp-session.go:215:',
+            0|index  |   'unexpected',
+            0|index  |   'EOF' ]
+
+               Setting emit rtsp_broadcast_end at catch temporary
+            */
             streamPath = line.split(' ')[3].split(']')[2].substring(1)
             const broadcastAddr = `rtsp://${serverAddress}:554${streamPath}`
             console.log('Broadcast stop: EOF', broadcastAddr)
@@ -46,6 +54,7 @@ function handleNewLogLine (io, line) {
 
     } catch (err) {
         console.log(err)
+        io.emit('rtsp_broadcast_end', broadcastAddr)
     }
     
 }
