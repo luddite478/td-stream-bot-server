@@ -76,7 +76,7 @@ function chooseExtByMimeType (type, mime_type) {
 
             } else {
                 const extension = mime.getExtension(mime_type)
-                console.log('asdadasdasda', mime.getExtension('audio/ogg'))
+
                 if (!TD_SUPPORTED_AUDIO_EXTENSIONS.some(ext => ext === extension)) {
                     return null
                 }
