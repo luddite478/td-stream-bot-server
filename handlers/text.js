@@ -34,6 +34,8 @@ function handleRestreamCmd (io, bot, msg) {
 
     const { hostname } = new URL(stream_link)
     const supportedStreamPlatforms = [
+        'www.youtube.com',
+        'www.youtu.be',
         'youtube.com',
         'youtu.be'
     ]
