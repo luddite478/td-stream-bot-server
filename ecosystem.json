@@ -2,6 +2,9 @@
     apps : [{
       name : 'stream-server',
       script : 'index.js',
-      interpreter : 'node@12.16.1'
+      interpreter : 'node@12.16.1',
+      out_file: 'logs/out.log',
+      log_file: 'logs/combined.log',
+      time: true
    }]
   }
