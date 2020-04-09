@@ -45,6 +45,7 @@ function handleRestreamCmd (io, bot, msg) {
         return 
     }
 
+    console.log('Valid restream request, emitting event. Link: ', stream_link)
     io.emit('restream_request', stream_link)
 }
 
