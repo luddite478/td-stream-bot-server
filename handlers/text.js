@@ -1,6 +1,8 @@
 const { isUserAllowed, choosePhotoWithMaxResolution } = require('../utils')
+const validUrl = require('valid-url')
 
 const FILE_TYPE = 'text'
+
 const infoMsg = (channelLink) => `
 This is a media request bot for live stream channel ${channelLink}.
 
@@ -12,6 +14,35 @@ New request will play forever until the next one.
 
 Maximum file size is 20mb.
 `
+
+function handleRestreamCmd (io, bot, splittedMsg) {
+
+    if (splittedMsg.length !== 2) {
+        bot.sendMessage(msg.chat.id, `Can't handle your request. 
+        Command: /restream <youtube_link>, for example: /restream https://www.youtube.com/watch?v=fHd4tdYJYVw`)
+        return
+    } 
+
+    const stream_link = splittedMsg[1]
+
+    if (!validUrl.isUri(stream_link)) {
+        bot.sendMessage(msg.chat.id, `Url is not vavlid`)
+        return
+    }
+
+    const { hostname } = new URL(stream_link)
+    const supportedStreamPlatforms = [
+        'youtube.com',
+        'youtu.be'
+    ]
+
+    if (!supportedStreamPlatforms.some((platform) => platform === hostname)) {
+        bot.sendMessage(msg.chat.id, `${hostname} is not supported`)
+        return 
+    }
+
+    io.emit('restream_request', stream_link)
+}
 
 module.exports = (io, bot, msg) => {
     try {
@@ -35,13 +66,19 @@ module.exports = (io, bot, msg) => {
             throw new Error(`User ${username} is not allowed`)
         }
 
-        if (text.match(/\/info/)) {
+        const splittedMsg = text.split(' ')
+
+        if (splittedMsg[0].match(/\/info/)) {
             bot.sendMessage(msg.chat.id, infoMsg(process.env.YT_CHANNEL_LINK))
+
+        } else if (splittedMsg[0].match(/\/restream/)) {
+            handleRestreamCmd(io, bot, splittedMsg)
         } else {
             bot.sendMessage(msg.chat.id, `Can't handle your request, to get list of available actions use /info`)
         }
 
     } catch (err) {
         console.log(err)
+        bot.sendMessage(msg.chat.id, `Can't handle your request, to get list of available actions use /info`)
     }
 }
