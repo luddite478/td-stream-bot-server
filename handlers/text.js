@@ -15,7 +15,7 @@ New request will play forever until the next one.
 Maximum file size is 20mb.
 `
 
-function handleRestreamCmd (io, bot, splittedMsg) {
+function handleRestreamCmd (io, bot, msg) {
     const { text } = msg
     const splittedMsg = text.split(' ')
 
