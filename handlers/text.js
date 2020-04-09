@@ -16,6 +16,8 @@ Maximum file size is 20mb.
 `
 
 function handleRestreamCmd (io, bot, splittedMsg) {
+    const { text } = msg
+    const splittedMsg = text.split(' ')
 
     if (splittedMsg.length !== 2) {
         bot.sendMessage(msg.chat.id, `Can't handle your request. 
@@ -72,7 +74,7 @@ module.exports = (io, bot, msg) => {
             bot.sendMessage(msg.chat.id, infoMsg(process.env.YT_CHANNEL_LINK))
 
         } else if (splittedMsg[0].match(/\/restream/)) {
-            handleRestreamCmd(io, bot, splittedMsg)
+            handleRestreamCmd(io, bot, msg)
         } else {
             bot.sendMessage(msg.chat.id, `Can't handle your request, to get list of available actions use /info`)
         }
