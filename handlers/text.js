@@ -6,13 +6,17 @@ const FILE_TYPE = 'text'
 const infoMsg = (channelLink) => `
 This is a media request bot for live stream channel ${channelLink}.
 
-You are able to request audio, video, image files and send voice messages.
+Available actions:
+1. **Video, audio, image, voice message request**
 
 To make a request drop a file into the chat.
-
 New request will play forever until the next one.
-
 Maximum file size is 20mb.
+
+2. **Youtube restream request**
+
+type \`/restream youtube_stream_link\`
+To stop restream type \`restream stop\` or drop some media file to show instead of your stream.
 `
 
 function handleRestreamCmd (io, bot, msg) {
@@ -25,7 +29,16 @@ function handleRestreamCmd (io, bot, msg) {
         return
     } 
 
-    const stream_link = splittedMsg[1]
+    const secondWord = splittedMsg[1]
+
+    if (secondWord === 'stop') {
+        console.log('Got stop restream command')
+        bot.sendMessage(msg.chat.id, `Going to stop restreaming`)
+        io.emit('restream_stop_request', true)
+        return
+    }
+
+    const stream_link = secondWord
 
     if (!validUrl.isUri(stream_link)) {
         bot.sendMessage(msg.chat.id, `Url is not vavlid`)
