@@ -32,22 +32,15 @@ module.exports = (io, bot, msg) => {
             throw new Error(`User ${username} is not allowed`)
         }
 
-        // const extension = chooseExtByMimeType(FILE_TYPE, mime_type)
-
-        // if (!extension) {
-        //     bot.sendMessage(msg.chat.id, `extension is not supported`)
-        //     throw new Error(`${FILE_TYPE} file extension is not supported`)
-        // }
-
         const requestMeta = {
             type: FILE_TYPE,
             username,
             date: Date.now(),
             message_id,
-            extention: 'mp4',
             file: {
                 file_size,
-                duration
+                duration,
+                extention: 'mp4',
             }
         }
  
