@@ -2,6 +2,7 @@ const handleVideoRequest  = require('./video')
 const handleAudioRequest  = require('./audio')
 const handlePhotoRequest  = require('./photo')
 const handleTextRequest  = require('./text')
+const handleVideoNoteRequest = require('./video_note')
 const contentTypeParser = require('content-type-parser')
 
 module.exports = (io, bot, msg) => {
@@ -30,6 +31,10 @@ module.exports = (io, bot, msg) => {
 
         } else if (msgKeys.some(key => key === 'photo')) {
             handlePhotoRequest(io, bot, msg)
+            return
+
+        } else if (msgKeys.some(key => key === 'video_note')) {
+            handleVideoNoteRequest(io, bot, msg)
             return
 
         } else if (msgKeys.some(key => key === 'text')) {
