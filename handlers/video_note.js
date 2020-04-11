@@ -46,7 +46,6 @@ module.exports = (io, bot, msg) => {
             message_id,
             file: {
                 file_size,
-                extension,
                 duration
             }
         }
