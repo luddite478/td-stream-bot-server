@@ -44,6 +44,7 @@ module.exports = (io, bot, msg) => {
             username,
             date: Date.now(),
             message_id,
+            extention: 'mp4',
             file: {
                 file_size,
                 duration
