@@ -40,7 +40,7 @@ module.exports = (io, bot, msg) => {
             file: {
                 file_size,
                 duration,
-                extention: 'mp4',
+                extension: 'mp4',
             }
         }
  
