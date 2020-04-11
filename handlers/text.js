@@ -4,16 +4,17 @@ const validUrl = require('valid-url')
 const FILE_TYPE = 'text'
 
 const infoMsg = (channelLink) => `
-This is a media request bot for live stream channel ${channelLink}.
+This is a media request bot for live [channel](${channelLink}) stream.
 
-**Available actions**:
-1. *Video, audio, image, voice message request*
+Available actions:
+
+*1. Video, audio, image, voice message request*
 
 To make a request drop a file into the chat.
 New request will play forever until the next one.
 Maximum file size is 20mb.
 
-2. *Youtube restream request*
+*2. Youtube restream request*
 
 type \`/restream youtube_stream_link\`
 To stop restream type \`restream stop\` or drop some media file to show instead of your stream.
