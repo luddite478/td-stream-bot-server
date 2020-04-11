@@ -30,7 +30,7 @@ module.exports = (io, bot, msg) => {
             throw new Error(`User ${username} is not allowed`)
         }
 
-        const extention = chooseExtByMimeType(FILE_TYPE, mime_type)
+        const extension = chooseExtByMimeType(FILE_TYPE, mime_type)
 
         if (!extension) {
             bot.sendMessage(msg.chat.id, `extension is not supported`)
