@@ -10,8 +10,8 @@ const is_https = process.env.IS_HTTPS
 let server
 if (is_https === 'YES') {
     server = require('https').createServer({
-        key: fs.readFileSync(path.normalize('./https/stream_server.key')),
-        cert: fs.readFileSync(path.normalize('./https/stream_server.crt')),
+        key: fs.readFileSync(path.normalize('./https/key.pem')),
+        cert: fs.readFileSync(path.normalize('./https/cert.pem')),
         ca: fs.readFileSync(path.normalize('./https/rootCA.pem')),
         requestCert: false,
         rejectUnauthorized: false
