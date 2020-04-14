@@ -18,7 +18,6 @@ if (is_https === 'YES') {
     }, app)
 } else {
     server = require('http').createServer(app)
-    
 }
  
 const io = require('socket.io')(server)
