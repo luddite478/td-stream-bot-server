@@ -1,11 +1,28 @@
+require('dotenv').config()
 const express = require('express')
 const TelegramBot = require('node-telegram-bot-api')
 const app = express()
-const http = require('http').createServer(app)
-const io = require('socket.io')(http)
 const path = require('path')
+
+const is_https = process.env.IS_HTTPS
+
+let server
+if (is_https === 'YES') {
+    server = require('https').createServer({
+        key: fs.readFileSync('~/.ssh/stream_server.key'),
+        cert: fs.readFileSync('~/.ssh/stream_server.crt'),
+        ca: fs.readFileSync('~/.ssh/rootCA.pem'),
+        requestCert: false,
+        rejectUnauthorized: false
+    }, app)
+} else {
+    server = require('http').createServer(app)
+    
+}
+ 
+const io = require('socket.io')(server)
 require('./stream_notificator')(io)
-require('dotenv').config()
+
 
 const PORT = 8787
 
@@ -65,6 +82,6 @@ bot.on('polling_error', (error) => {
 // http server
 app.get('/download', handleDownloadRequest)
 
-http.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`listening on ${PORT}`)
 })

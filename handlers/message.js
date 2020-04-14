@@ -2,7 +2,7 @@ const handleVideoRequest  = require('./video')
 const handleAudioRequest  = require('./audio')
 const handlePhotoRequest  = require('./photo')
 const handleTextRequest  = require('./text')
-const handleVideoNoteRequest = require('./video_note')
+const handleVideoNoteRequest = require('./video_note.js')
 const contentTypeParser = require('content-type-parser')
 
 module.exports = (io, bot, msg) => {
