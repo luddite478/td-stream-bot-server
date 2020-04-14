@@ -81,6 +81,10 @@ bot.on('polling_error', (error) => {
 
 // http server
 app.get('/download', handleDownloadRequest)
+app.get('/test', (req,res) => {
+    console.log('REQ TEST')
+    res.send('hi')
+})
 
 server.listen(PORT, () => {
     console.log(`listening on ${PORT}`)
