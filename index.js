@@ -3,6 +3,7 @@ const express = require('express')
 const TelegramBot = require('node-telegram-bot-api')
 const app = express()
 const path = require('path')
+const fs = require('fs')
 
 const is_https = process.env.IS_HTTPS
 
